@@ -1,0 +1,18 @@
+---
+application: "beth"
+version: "1.0.0-SNAPSHOT"
+author: "robdu"
+clustered: true
+blocks:
+  all:
+    - "se.idainfront.robdu.EthereumService"
+    - "se.idainfront.robdu.IndexingService"
+    - "se.idainfront.robdu.WebsocketService"
+  eth:
+    - "se.idainfront.robdu.EthereumService"
+  index:
+    - "se.idainfront.robdu.IndexingService"
+  websock:
+    - "se.idainfront.robdu.WebsocketService"
+hosts:
+  localhost: "default"

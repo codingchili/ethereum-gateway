@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
+}
+
+group 'se.idainfront.robdu'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile  "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile 'org.web3j:core:4.5.5'
+
+    compile("com.github.codingchili.chili-core:core:1.3.0") {
+        //exclude group: 'org.elasticsearch.client', module: 'elasticsearch-rest-high-level-client'
+        exclude group: 'com.googlecode.cqengine', module: 'cqengine'
+        //exclude group: 'io.vertx', module: 'vertx-hazelcast'
+        exclude group: 'io.vertx', module: 'vertx-mongo-client'
+    }
+
+    testCompile 'io.vertx:vertx-unit:3.8.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "11"
+}
+
+jar {
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+
+    manifest {
+        attributes "Main-Class": "se.idainfront.robdu.LauncherKt"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

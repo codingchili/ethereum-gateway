@@ -1,0 +1,6 @@
+---
+storage:
+  com.codingchili.core.storage.ElasticMap:
+    host: "stuck"
+    port: 9200
+maxResults: 32
