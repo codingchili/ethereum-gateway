@@ -2,6 +2,7 @@ import {PolymerElement, html} from '../node_modules/@polymer/polymer/polymer-ele
 import '../node_modules/@polymer/paper-button/paper-button'
 import '../node_modules/@polymer/paper-input/paper-input'
 import '../node_modules/@polymer/paper-toast/paper-toast'
+import '../node_modules/@polymer/paper-card/paper-card.js'
 import '../style/style.js'
 
 import {Beth} from '../script/beth.js'
@@ -13,8 +14,7 @@ class BrokerSearch extends PolymerElement {
                 #search-area {
                     margin: auto;
                     width: 60%;
-                    display: flex;
-                    flex-direction: row;
+                    display: block;
                 }
 
                 #search {
@@ -25,20 +25,26 @@ class BrokerSearch extends PolymerElement {
                     margin-top: 12px;
                 }
 
+                #inner-container {
+                    display: flex;
+                    flex-direction: row;
+                    padding: 16px;
+                }
+
                 paper-toast {
-                    --paper-toast-background-color: orange;
-                    text-align: center;
+                    margin-top: 108px;
                 }
 		    </style>
 
-			<div>search-area</div>
-			<div id="search-area">
-                <paper-input placeholder="search" id="search" value="{{query}}" on-keydown="_enter" autofocus></paper-input>
-                <div>
-                    <paper-button raised id="search-button" on-click="_search">Search</paper-button>
+			<paper-card id="search-area">
+			    <div id="inner-container">
+                    <paper-input placeholder="search" id="search" value="{{query}}" on-keydown="_enter" autofocus></paper-input>
+                    <div>
+                        <paper-button raised id="search-button" on-click="_search">Search</paper-button>
+                    </div>
                 </div>
                 <paper-toast class="fit-bottom" id="feedback">[[feedback]]</paper-toast>
-			</div>
+			</paper-card>
 		`
 	}
 
@@ -89,6 +95,7 @@ class BrokerSearch extends PolymerElement {
         if (this.connected) {
             this.start = performance.now();
             this.beth.query(this.query, (event) => {
+                console.log(event);
                 if (event.errors) {
                     this._error(event.errors[0].message)
                 } else {
@@ -108,7 +115,7 @@ class BrokerSearch extends PolymerElement {
 
     _error(message) {
         this.feedback = message;
-        this.$.feedback.fitInto = this.$['search-area'];
+        this.$.feedback.fitInto = this.$['inner-container'];
         this.$.feedback.open();
     }
 

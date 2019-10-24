@@ -32,10 +32,14 @@ val plugins = listOf(
 )
 
 fun enrichQuery(json: JsonObject): JsonObject {
-    return enrichStream(
-        json.getJsonObject("data")
-            .getJsonObject("block")
-    ).put("route", "query")
+    return if (json.containsKey("data") && json.getJsonObject("data").containsKey("block")) {
+        enrichStream(
+            json.getJsonObject("data")
+                .getJsonObject("block")
+        ).put("route", "query")
+    } else {
+        json.put("route", "query");
+    }
 }
 
 // dev class to enrich data coming from the chain to make it appear more "real"

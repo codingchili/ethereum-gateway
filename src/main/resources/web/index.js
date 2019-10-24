@@ -5,8 +5,15 @@ import './component/broker-log.js'
 class BrokerSpace extends PolymerElement {
 	static get template() {
 		return html`
-			<broker-search result="{{result}}"></broker-search>
-			<broker-log messages="[[result]]"></broker-log>
+		    <style>
+		        #page {
+		            margin-top: 32px;
+		        }
+		    </style>
+		    <div id="page">
+                <broker-search result="{{result}}"></broker-search>
+                <broker-log messages="[[result]]"></broker-log>
+            </page>
 		`
 	}
 

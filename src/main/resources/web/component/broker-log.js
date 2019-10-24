@@ -2,6 +2,7 @@ import {PolymerElement, html} from '../node_modules/@polymer/polymer/polymer-ele
 import '../node_modules/@polymer/paper-tabs/paper-tabs.js'
 import '../node_modules/@polymer/iron-pages/iron-pages.js'
 import '../node_modules/@polymer/paper-checkbox/paper-checkbox.js'
+import '../node_modules/@polymer/paper-card/paper-card.js'
 
 import './broker-messages.js'
 import '../style/style.js'
@@ -23,8 +24,15 @@ class BrokerLog extends PolymerElement {
 		return html`
 		    <style include="style-element">
 		        #container {
-		            width: 80%;
-		            margin: auto;
+		            display: block;
+                    width: 80%;
+                    margin: auto;
+                    display: block;
+                    position: absolute;
+                    top: 164px;
+                    left: 10%;
+                    right: 10%;
+                    bottom: 64px;
 		        }
 
 		        .stream {
@@ -49,20 +57,21 @@ class BrokerLog extends PolymerElement {
 		            flex-direction: row;
 		            justify-content: space-between;
 		            padding-bottom: 16px;
+		            margin-left: 8px;
+		            margin-right: 8px;
 		        }
 		    </style>
 
-            <div id="container">
-                <div>mts-view</div>
+            <paper-card id="container">
                 <paper-tabs selected="{{selected}}" autoselect-delay="0">
-                    <paper-tab>stream</paper-tab>
-                    <paper-tab>results</paper-tab>
+                    <paper-tab>STREAM</paper-tab>
+                    <paper-tab>RESULTS</paper-tab>
                 </paper-tabs>
                 <iron-pages selected="{{selected}}">
                     <div>
                         <div class="header">
                              <span class="stream">Stream count [[stream.hits.length]]</span>
-                             <paper-checkbox checked>Streaming</paper-checkbox>
+                             <paper-checkbox checked checked$="[[streaming]]">Streaming</paper-checkbox>
                          </div>
                          <broker-messages messages="[[stream]]"></broker-messages>
                     </div>
@@ -74,12 +83,13 @@ class BrokerLog extends PolymerElement {
                         <broker-messages messages="[[messages]]"></broker-messages>
                     </div>
                 </iron-pages>
-            </div>
+            </paper-card>
 		`
 	}
 
 	constructor() {
 	    super();
+	    this.streaming = true;
 	    this.selected = 0;
 	    this.stream = {
 	        hits: []
@@ -91,10 +101,10 @@ class BrokerLog extends PolymerElement {
 	    this.beth = new Beth();
 	    this.beth.connect(() => {
             this.beth.stream(event => {
-                this.stream.hits.push(event);
-                console.log(event);
-                console.log(this.stream);
-                this.notifySplices('stream.hits');
+                if (this.streaming) {
+                    this.stream.hits.unshift(event);
+                    this.notifySplices('stream.hits');
+                }
             });
 	    });
 	}
