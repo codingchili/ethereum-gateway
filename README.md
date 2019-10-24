@@ -14,6 +14,8 @@ Build with microservices and the following libs
 
 (beth is a workspace, websocket gateway, ethereum ingest and query)
 
+![workspace screenshow](img/screenshot.png)
+
 NOTE: uses __block__ data enriched with mock whisper data as the whisper RPC calls isn't implemented in the Web3j client. 
 
 ### Build & Run
