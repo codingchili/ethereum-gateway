@@ -95,11 +95,9 @@ class BrokerSearch extends PolymerElement {
         if (this.connected) {
             this.start = performance.now();
             this.beth.query(this.query, (event) => {
-                console.log(event);
                 if (event.errors) {
                     this._error(event.errors[0].message)
                 } else {
-                    // todo support range/multiple hits
                     this.result = {
                         hits: [event],
                         time: (performance.now() - this.start).toFixed(2)
