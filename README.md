@@ -18,9 +18,9 @@ Overview of the services in the system, the *Service components are implemented 
 
 ![workspace screenshow](img/screenshot.png)
 
-Note: the web interface is not a part of this repository as its unlicensed.
+NOTE 1: the web interface is not a part of this repository as its unlicensed.
 
-NOTE: uses __block__ data enriched with mock whisper data as the whisper RPC calls isn't implemented in the Web3j client. 
+NOTE 2: uses __block__ data enriched with mock whisper data as the whisper RPC calls isn't implemented in the Web3j client. 
 
 ### Build & Run
 
