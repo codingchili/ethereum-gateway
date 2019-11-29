@@ -12,7 +12,7 @@ Includes the following libraries
 - Kibana
 - Geth 1.9.2
 
-![architecture overview](img/architecture.png)
+![architecture overview](img/architecture_1.png)
 
 Overview of the services in the system, the *Service components are implemented using chili-core.
 
