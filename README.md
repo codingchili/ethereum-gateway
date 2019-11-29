@@ -1,8 +1,8 @@
 # Broker Ethereum
 
-Augments the iipax platform with an Ethereum-based message broker.
+Publisher/subscriber services for the Geth JSON RPC-API implemented as microservices.
 
-Build with microservices and the following libs
+Includes the following libraries
 
 - Hazelcast
 - Web3j
@@ -12,9 +12,13 @@ Build with microservices and the following libs
 - Kibana
 - Geth 1.9.2
 
-(beth is a workspace, websocket gateway, ethereum ingest and query)
+![architecture overview](img/architecture.png)
+
+Overview of the services in the system, the *Service components are implemented using chili-core.
 
 ![workspace screenshow](img/screenshot.png)
+
+Note: the web interface is not a part of this repository as its unlicensed.
 
 NOTE: uses __block__ data enriched with mock whisper data as the whisper RPC calls isn't implemented in the Web3j client. 
 
