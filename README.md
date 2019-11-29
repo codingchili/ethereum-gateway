@@ -1,6 +1,6 @@
 # Broker Ethereum
 
-Publisher/subscriber services for the Geth JSON RPC-API implemented as microservices.
+Publisher/subscriber services for the Geth JSON RPC-API implemented as microservices. All of the microservices are implemented using the chili-core framework and written in Kotlin.
 
 Includes the following libraries
 
